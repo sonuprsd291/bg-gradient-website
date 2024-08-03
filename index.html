@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Background Gradient Generator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>BG Gradient Tool</h1>
+        <br>
+        <div class="buttonWarp">
+           <button id="btnOne">#051937</button>
+           <button id="btnTwo">#008793</button>
+        </div>
+        <div class="copyCode">
+           <p>Copy your code by clicking here.</p>
+           <div id="cssCode" onclick="copyText()">
+              background-image: linear-gradient(to right, #051937, #008793)
+           </div>
+        </div>
+    </div>
+
+    <script>
+        let btnOne = document.getElementById("btnOne");
+        let btnTwo = document.getElementById("btnTwo");
+        let rgb1 = "#051937";
+        let rgb2 = "#008793";
+        
+        const hexaValue = () => {
+            let myHexaValue = "0123456789abcdef";
+            let hexaCode = "#"
+            for(let i = 0; i < 6; i++){
+                // console.log(myHexaValue[Math.floor(Math.random()*16)]);
+                hexaCode = hexaCode + myHexaValue[Math.floor(Math.random()*16)];
+            }
+            return hexaCode
+        };
+
+        const handleButtonOne = () => {
+            rgb1 = hexaValue();
+            document.getElementById("btnOne").innerHTML = rgb1;
+            document.getElementById("cssCode").innerText = `background-image: linear-gradient(to right, ${rgb1},${rgb2}`;
+            document.body.style.backgroundImage = `linear-gradient(to right, ${rgb1}, ${rgb2}`;
+
+        };
+        const handleButtonTwo = () => {
+            rgb2 = hexaValue();
+            document.getElementById("btnTwo").innerHTML = rgb2;
+            document.getElementById("cssCode").innerText = `background-image: linear-gradient(to right, ${rgb1}, ${rgb2}`;
+            document.body.style.backgroundImage = `linear-gradient(to right, ${rgb1}, ${rgb2})`;
+        };
+
+        btnOne.addEventListener('click', handleButtonOne);
+        btnTwo.addEventListener('click', handleButtonTwo);
+
+        const copyText = () => {
+            navigator.clipboard.writeText(document.getElementById("cssCode").innerText);
+            alert('CSS Code Is Copied.')
+
+        };
+        //TODO
+        // Test Code
+        // Text Edit
+
+    </script>
+</body>
+</html>
